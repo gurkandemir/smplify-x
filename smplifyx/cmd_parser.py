@@ -57,6 +57,10 @@ def parse_config(argv=None):
                         type=lambda arg: arg.lower() == 'true',
                         default=False,
                         help='Display plots while running the optimization')
+    parser.add_argument('--only_output',
+                        type=lambda arg: arg.lower() == 'true',
+                        default=False,
+                        help='Display only output image, not visualize while running optimization.')
     parser.add_argument('--degrees', type=float, default=[0, 90, 180, 270],
                         help='Degrees of rotation for rendering the final' +
                         ' result')

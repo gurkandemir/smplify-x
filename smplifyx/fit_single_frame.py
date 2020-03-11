@@ -304,9 +304,7 @@ def fit_single_frame(img,
 
     with fitting.FittingMonitor(
             batch_size=batch_size, visualize=visualize, **kwargs) as monitor:
-
         img = torch.tensor(img, dtype=dtype)
-
         H, W, _ = img.shape
 
         data_weight = 1000 / H
@@ -339,6 +337,9 @@ def fit_single_frame(img,
             camera_opt_params,
             **kwargs)
 
+        if(kwargs.get('only_output')):
+            monitor.mv.close_viewer()
+        
         # The closure passed to the optimizer
         fit_camera = monitor.create_fitting_closure(
             camera_optimizer, body_model, camera, gt_joints,
@@ -553,3 +554,4 @@ def fit_single_frame(img,
 
         img = pil_img.fromarray((output_img * 255).astype(np.uint8))
         img.save(out_img_fn)
+
