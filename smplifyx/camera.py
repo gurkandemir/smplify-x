@@ -23,7 +23,8 @@ from collections import namedtuple
 
 import torch
 import torch.nn as nn
-
+import math
+from math import sin, cos, pi
 from smplx.lbs import transform_mat
 
 
@@ -80,6 +81,13 @@ class PerspectiveCamera(nn.Module):
             rotation = torch.eye(
                 3, dtype=dtype).unsqueeze(dim=0).repeat(batch_size, 1, 1)
 
+        DEG_TO_RAD = math.pi / 180.0
+        angle_rad = kwargs.get('rotation_degree') * DEG_TO_RAD
+
+        rotation = torch.tensor([[cos(angle_rad), 0, sin(angle_rad)], 
+        [0,1,0],
+        [-sin(angle_rad), 0, cos(angle_rad)]]).unsqueeze(0)
+
         rotation = nn.Parameter(rotation, requires_grad=True)
         self.register_parameter('rotation', rotation)
 
@@ -115,3 +123,4 @@ class PerspectiveCamera(nn.Module):
         img_points = torch.einsum('bki,bji->bjk', [camera_mat, img_points]) \
             + self.center.unsqueeze(dim=1)
         return img_points
+

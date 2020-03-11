@@ -101,6 +101,8 @@ def parse_config(argv=None):
     parser.add_argument('--camera_type', type=str, default='persp',
                         choices=['persp'],
                         help='The type of camera used')
+    parser.add_argument('--rotation_degree', type=float, default=0,
+                        help='Degree of rotation of individual in scene.')
     parser.add_argument('--optim_jaw', default=True,
                         type=lambda x: x.lower() in ['true', '1'],
                         help='Optimize over the jaw pose')
@@ -281,3 +283,4 @@ def parse_config(argv=None):
     args = parser.parse_args()
     args_dict = vars(args)
     return args_dict
+
