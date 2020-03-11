@@ -47,6 +47,7 @@ python smplifyx/main.py --config cfg_files/fit_smplx.yaml
     --part_segm_fn smplx_parts_segm.pkl
     --rotation_degree 45
     --only_output="True"
+    --background_color='red'
 ```
 where the `DATA_FOLDER` should contain two subfolders, *images*, where the
 images are located, and *keypoints*, where the OpenPose output should be
@@ -55,6 +56,8 @@ stored.
 where `rotation_degree` is degree of rotation of individual in scene, by default it is 0.
 
 where `only_output` is rendering only output, no visualization during optimization, by default it is False.
+
+where `background_color` is color of background, options are `none`, `red`, `green`, `blue`, by default it is `none`.
 
 ### Different Body Models
 
