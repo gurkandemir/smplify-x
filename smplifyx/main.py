@@ -240,8 +240,11 @@ def main(**args):
             elif gender == 'male':
                 body_model = male_model
 
-            out_img_fn = osp.join(curr_img_folder, 'output.png')
-
+            try: 
+                out_img_fn = osp.join(curr_img_folder, '{:06d}.png'.format(int(fn)))
+            except:
+                out_img_fn = osp.join(curr_img_folder, 'output.png')
+            
             fit_single_frame(img, keypoints[[person_id]],
                              body_model=body_model,
                              camera=camera,
