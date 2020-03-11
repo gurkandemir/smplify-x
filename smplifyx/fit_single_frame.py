@@ -483,6 +483,10 @@ def fit_single_frame(img,
                 min_idx = 0
             pickle.dump(results[min_idx]['result'], result_file, protocol=2)
 
+    if(kwargs.get('augment')):
+        a = body_model.betas.add(torch.randn(10, device='cuda'))
+        body_model.register_parameter('betas', torch.nn.Parameter(a, requires_grad=True))
+
     if save_meshes or visualize:
         body_pose = vposer.decode(
             pose_embedding,
