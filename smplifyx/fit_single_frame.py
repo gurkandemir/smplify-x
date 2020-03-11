@@ -553,6 +553,15 @@ def fit_single_frame(img,
 
         valid_mask = (color[:, :, -1] > 0)[:, :, np.newaxis]
         input_img = img.detach().cpu().numpy()
+        background_color = kwargs.get('background_color')
+        if(background_color != 'none'):
+            if(background_color == 'red'): 
+                input_img = np.full((H, W, 3), [230 / 255, 55 / 255, 85 / 255])
+            if(background_color == 'green'):
+                input_img = np.full((H, W, 3), [125 / 255, 230 / 255, 55 / 255])
+            if(background_color == 'blue'):
+                input_img = np.full((H, W, 3), [55 / 255, 115 / 255, 230 / 255])
+
         output_img = (color[:, :, :-1] * valid_mask +
                       (1 - valid_mask) * input_img)
 

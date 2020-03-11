@@ -95,6 +95,9 @@ def parse_config(argv=None):
     parser.add_argument('--gender_lbl_type', default='none',
                         choices=['none', 'gt', 'pd'], type=str,
                         help='The type of gender label to use')
+    parser.add_argument('--background_color', default='none',
+                        choices=['none', 'red', 'green', 'blue'], type=str,
+                        help='The background image of output.')
     parser.add_argument('--gender', type=str,
                         default='neutral',
                         choices=['neutral', 'male', 'female'],
