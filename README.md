@@ -45,10 +45,13 @@ python smplifyx/main.py --config cfg_files/fit_smplx.yaml
     --model_folder MODEL_FOLDER
     --vposer_ckpt VPOSER_FOLDER
     --part_segm_fn smplx_parts_segm.pkl
+    --rotation_degree 45
 ```
 where the `DATA_FOLDER` should contain two subfolders, *images*, where the
 images are located, and *keypoints*, where the OpenPose output should be
 stored.
+
+where `rotation_degree` is degree of rotation of individual in scene, by default it is 0.
 
 ### Different Body Models
 
