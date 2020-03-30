@@ -65,6 +65,10 @@ def parse_config(argv=None):
                         type=lambda arg: arg.lower() == 'true',
                         default=False,
                         help='Augment mode is opened or not, changes beta values that obtained from optimized one.')
+    parser.add_argument('--symmetry',
+                        type=lambda arg: arg.lower() == 'true',
+                        default=False,
+                        help='Take symmetry of output image.')
     parser.add_argument('--degrees', type=float, default=[0, 90, 180, 270],
                         help='Degrees of rotation for rendering the final' +
                         ' result')

@@ -21,6 +21,9 @@ from __future__ import division
 
 
 import time
+
+from PIL import ImageOps
+
 try:
     import cPickle as pickle
 except ImportError:
@@ -339,7 +342,7 @@ def fit_single_frame(img,
 
         if(kwargs.get('only_output')):
             monitor.mv.close_viewer()
-        
+
         # The closure passed to the optimizer
         fit_camera = monitor.create_fitting_closure(
             camera_optimizer, body_model, camera, gt_joints,
@@ -555,10 +558,10 @@ def fit_single_frame(img,
         input_img = img.detach().cpu().numpy()
         background_color = kwargs.get('background_color')
         if(background_color != 'none'):
-            if(background_color == 'red'): 
-                input_img = np.full((H, W, 3), [230 / 255, 55 / 255, 85 / 255])
+            if(background_color == 'red'):
+                input_img = np.full((H, W, 3), [208 / 255, 61 / 255, 40 / 255])
             if(background_color == 'green'):
-                input_img = np.full((H, W, 3), [125 / 255, 230 / 255, 55 / 255])
+                input_img = np.full((H, W, 3), [89 / 255, 158 / 255, 31 / 255])
             if(background_color == 'blue'):
                 input_img = np.full((H, W, 3), [55 / 255, 115 / 255, 230 / 255])
 
@@ -566,5 +569,8 @@ def fit_single_frame(img,
                       (1 - valid_mask) * input_img)
 
         img = pil_img.fromarray((output_img * 255).astype(np.uint8))
-        img.save(out_img_fn)
 
+        if(kwargs.get('symmetry')):
+            img = ImageOps.mirror(img)
+
+        img.save(out_img_fn, quality=95)
